@@ -1,6 +1,9 @@
 # ollama_lab
 Deploy your Local LLM Web App in Kubernetes using Ollama and OpenWebUI 
-![logo](image.png)
+<p align="center">
+  <img src="image/image.png" alt="streamlit" width="100"/>
+</p>
+
 # Table of Contents
 1. [OLLAMA and LLMs](#ollama)
 2. [Designing the Chatbot](#designing-the-chatbot)
@@ -286,8 +289,9 @@ SYSTEM You are a helpful AI assistant named e-llmo Assistant
  ```
  ollama create llama3.1 -f llama31.loc
  ```
-
-![streamlit](image-2.png)
+<p align="center">
+  <img src="image/image-1.png" alt="streamlit" width="650"/>
+</p>
 
 # Streamlit
 Streamlit is a popular Python library that makes it easy to create and deploy web applications for machine learning and data science projects. It's widely used for its simplicity in turning Python scripts into interactive web apps.
@@ -295,8 +299,7 @@ Streamlit is a popular Python library that makes it easy to create and deploy we
 **install** 
 - ```pip install llama-cpp-python streamlit```
 # Integrating Ollama with Streamlit:
-Detailed steps on how to integrate the chatbot model or framework (Ollama) into a Streamlit web application, including handling user inputs from the web interface and displaying responses.
-
+Detailed steps on how to integrate the chatbot model or framework (Ollama) into a Streamlit web application, including handling user inputs from the web interface and displaying responses.<p align="center">  <img src="image/image-2.png" alt="streamlit" width="650"/></p>
 **Description**
 - `ollama_chatbot.py` uses Streamlit to create a web-based chat interface with the Ollama language models.
 -  The `config.py` sets up the configuration for the **app**, including available models and page title,
