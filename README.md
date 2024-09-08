@@ -8,7 +8,7 @@ Deploy your Local LLM Web App in Kubernetes using Ollama and OpenWebUI
    - [Integrating Ollama with Streamlit](#integrating-ollama-with-streamlit)
    - [OCI OKE Use Case](#oci-oke-use-case)
 9. [Multimodal Vision Language Models](#multimodal-vision-language-models)
-10. [Vision Models (GGUF)](#vision-models-gguf)
+   - [Vision Models (GGUF)](#vision-models-gguf)
 
 # OLLAMA:
 
