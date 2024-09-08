@@ -31,14 +31,11 @@ https://ollama.com/search?q=&p=1
 
 1. **Models:**
 ```
-llama2-uncensored
-llama2
+llama3.1
 codellama    => debug code
 mistral
 llava        => multi modal / images vision transformer
-bakllava
 ```
-georgesung/llama2_7b_chat_uncensored
 
 **CAN MY MACHINE RUN LLM ?**
 go to this HF portal and check: [can-it-run-llm](https://huggingface.co/spaces/Vokturz/can-it-run-llm)
@@ -79,10 +76,48 @@ ollama list
 ollama rm llama2-uncensored
 ```
 
+### Examples
+
+#### Generate request (Streaming)
+
+##### Request
+
+```shell
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3",
+  "prompt": "Why is the sky blue?"
+}'
+```
+
+##### Response
+
+A stream of JSON objects is returned:
+
+```json
+{
+  "model": "llama3",
+  "created_at": "2023-08-04T08:52:19.385406455-07:00",
+  "response": "The",
+  "done": false
+}
+```
+
+The final response in the stream also includes additional data about the generation:
+
+- `total_duration`: time spent generating the response
+- `load_duration`: time spent in nanoseconds loading the model
+- `prompt_eval_count`: number of tokens in the prompt
+- `prompt_eval_duration`: time spent in nanoseconds evaluating the prompt
+- `eval_count`: number of tokens in the response
+- `eval_duration`: time in nanoseconds spent generating the response
+- `context`: an encoding of the conversation used in this response, this can be sent in the next request to keep a conversational memory
+- `response`: empty if the response was streamed, if not streamed, this will contain the full response
+
+To calculate how fast the response is generated in tokens per second (token/s), divide `eval_count` / `eval_duration` * `10^9`.
 
 
 ----------------------
-**HuggingFace and vs ollama** 
+**HuggingFace meets ollama** 
  - Hf takes the weights and ollama uses a model which includes weights and system prompt and template etc.
 
 1. **Where are models stored?**
