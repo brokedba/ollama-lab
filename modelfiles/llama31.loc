@@ -1,0 +1,37 @@
+# Set the base model
+FROM ./ai_models/Meta-Llama-3.1-8B-Instruct-Q4_K_S.gguf
+
+# Set custom parameter values
+PARAMETER temperature 1.0
+PARAMETER stop "<|start_header_id|>"
+PARAMETER stop "<|end_header_id|>"
+PARAMETER stop "<|eot_id|>"
+
+# Define the model template
+TEMPLATE """
+{{- if or .System .Tools }}<|start_header_id|>system<|end_header_id|>
+{{- if .System }}
+{{ .System }}
+{{- end }}
+{{- if .Tools }}
+Cutting Knowledge Date: December 2023
+
+When you receive a tool call response, use the output to format an answer to the original user question.
+
+You are a helpful assistant with tool calling capabilities.
+{{- end }}
+<|eot_id|>{{- end }}
+{{- range $i, $_ := .Messages }}
+{{- $last := eq (len (slice $.Messages $i)) 1 }}
+{{- if eq .Role "user" }}<|start_header_id|>user<|end_header_id|>
+{{ .Content }}<|eot_id|>{{ if $last }}<|start_header_id|>assistant<|end_header_id|>{{ end }}
+{{- else if eq .Role "assistant" }}<|start_header_id|>assistant<|end_header_id|>
+{{ .Content }}{{ if not $last }}<|eot_id|>{{ end }}
+{{- else if eq .Role "tool" }}<|start_header_id|>ipython<|end_header_id|>
+{{ .Content }}<|eot_id|>{{ if $last }}<|start_header_id|>assistant<|end_header_id|>{{ end }}
+{{- end }}
+{{- end }}
+"""
+
+# Set the system message
+SYSTEM You are a helpful AI assistant named e-llmo Assistant.
