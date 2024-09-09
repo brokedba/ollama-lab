@@ -1,0 +1,3 @@
+ollama
+streamlit
+llama-cpp-python
