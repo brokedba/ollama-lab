@@ -3,6 +3,10 @@ Deploy your Local LLM Web App in Kubernetes using Ollama and OpenWebUI
 <p align="center">
   <img src="image/image.png" alt="streamlit" width="100"/>
 </p>
+<p align="center">
+  <img src="image/ollama_project.drawio.png" alt="streamlit" width="650"/>
+</p>
+
 
 # Table of Contents
 1. [OLLAMA and LLMs](#ollama)
