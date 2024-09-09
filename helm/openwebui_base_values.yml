@@ -1,0 +1,86 @@
+# Open WebUI Helm values
+nameOverride: ""
+
+#  Include Ollama in the deployment
+ollama:
+  enabled: false
+# -- A list of Ollama API endpoints (i.e service FQDN:<PORT> name or remote URL:<PORT>)
+ollamaUrls:
+  - "http://ollama.ollama.svc.cluster.local:11434"
+
+pipelines:
+  enabled: true
+# -- Value of cluster domain
+clusterDomain: cluster.local
+
+annotations: {}
+podAnnotations: {}
+replicaCount: 1
+
+# -- Open WebUI image tags can be found here: https://github.com/open-webui/open-webui/pkgs/container/open-webui
+image:
+  repository: ghcr.io/open-webui/open-webui
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+# -- Docker registry secret names as an array  
+imagePullSecrets: 
+  - name: dockerhub-sec
+# -- Node labels for pod assignment.
+nodeSelector:
+  role: openwebui
+
+# -- Tolerations for pod assignment
+tolerations: []
+
+# -- Affinity for pod assignment
+affinity: {}
+###############################
+# Enable Storage persistence  #
+###############################
+persistence:
+  enabled: true
+  size: 5Gi
+  # -- Use existingClaim if you want to re-use an existing Open WebUI PVC instead of creating a new one
+  existingClaim: ""
+  # -- If using multiple replicas, you must update accessModes to ReadWriteMany
+  accessModes:
+    - ReadWriteOnce
+  storageClass: ""
+  selector: {}
+  annotations: {}
+  
+##########################
+# Configure the ingress  #
+##########################
+ingress:
+  enabled: true
+  class: "nginx"
+  annotations:
+  kubernetes.io/ingress.class: nginx
+  host: ""
+  tls: false
+  existingSecret: "openwebui-tls-secret"
+
+#########################
+# Configure Service     #
+#########################
+
+service:
+  type: ClusterIP  # Change service type to LoadBalancer
+  annotations: {}
+#    service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"  # Specify the shape of the LB
+#    service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+#    service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "100"
+#    service.beta.kubernetes.io/oci-load-balancer-internal: "false"  # Set to "false" if you need an external LB
+  port: 80
+  containerPort: 8080
+  loadBalancerIP: ""  # You can leave this empty or specify a static IP if required
+  labels: {}
+  loadBalancerClass: ""
+
+extraEnvVars:
+  - name: OPENAI_API_KEY
+    value: "0p3n-w3bu!"
+
+podSecurityContext: {}
+containerSecurityContext: {}
