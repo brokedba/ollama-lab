@@ -187,7 +187,64 @@ ingress:
       existingSecret: "openwebui-tls-secret"  # Use the TLS secret you just created
 
 ```
+-----------------
 
+# OpenWebUI Authenticaton using federated Identity 
+# Okta
+The process of enabling Okta as the identity manager for Open WebUI consists of several steps:
+Customize the configuration to your specific scenario and refer to the Okta documentation at https://help.okta.com/en-us/content/index.htm?cshid=csh-index for more information.
+# 1. Configuring Okta
+  - Log in to Okta and access the Admin panel.
+  - Go to Applications Create App Integration.
+  - In the Sign-in method section, select OIDC - OpenID Connect. In the Application type section,select Web Application. Click Next to proceed.
+  - In the General Settings section, set the App integration name to Open WebUI. In the Grant type section, toggle the Refresh token option. Optionally, specify an image for the application logo.
+- Set Sign-in redirect URIs to the callback URI, for example, `http://localhost:8080/oauth/oidc/callback` . The URI follows this pattern:
+`PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER/oauth/oidc/callback`
+- Similarly, set Sign-out redirect URIs to `PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER`
+- In the Assignments section, toggle the Skip group assignment for now option. Save changes.
+- In the General Settings section, click Edit and in the Login section, set the Sign-in redirect URIs option to the URI in this format:
+`PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER/oauth/oidc/callback`
+9. In the Login initiated by section, select App Only. Confirm with Save
+# 3. Gathering data for Open WebUI configuration
+In the top-right menu, copy the Okta domain. In this example, it is my-domain.okta.com .
+![image](https://github.com/user-attachments/assets/a5c66a0a-9fc3-4f6c-b15c-299d1b7b2b3b)
+Go to Applications Open WebUI and retrieve the Client ID and Client Secret.
+![image](https://github.com/user-attachments/assets/91c35c42-77b2-4a9b-aca8-6ab37d3f2657)
+
+# 4. Configuring Open WebUI for Okta integration
+To configure Open WebUI to use Okta as an authentication provider, you must set up
+specific environment variables.
+- Add the following environment variables to your Helm charts values.yaml le in the
+extraEnvVars section.
+```
+ENABLE_OAUTH_SIGNUP=true  # Allow account creation when logging in with OAuth 2.0.
+OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true # Allow logging into an account that matches e-mail provided by the OAuth2 IdP (optional).
+OAUTH_CLIENT_ID=CLIENT_ID    # Variable set for the authentication provider gathered from Okta
+OAUTH_CLIENT_SECRET=CLIENT_SECRET   # Specify scopes to request (optional, defaults to openid email profile )
+OPENID_PROVIDER_URL=OKTA_DOMAIN/.well-known/openid-configuration
+OAUTH_PROVIDER_NAME=Okta
+OAUTH_SCOPES=openid email profile 
+```
+The code block should look as follows:
+```YAML 
+extraEnvVars:
+ - name: ENABLE_OAUTH_SIGNUP
+ value: "True"
+ - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+ value: "True"
+ - name: OAUTH_CLIENT_ID
+ value: "CLIENT_ID"
+ - name: OAUTH_CLIENT_SECRET
+ value: "CLIENT_SECRET"
+ - name: OPENID_PROVIDER_URL
+ value: "OKTA_DOMAIN/.well-known/openid-configuration"
+ - name: OAUTH_PROVIDER_NAME
+ value: "Okta"
+ - name: OAUTH_SCOPES
+ value: "openid email profile"
+```
+- Restart Open WebUI to apply the changes.
+- If the configuration went well, you should see the Continue with Okta button as an option on both sign-in and sign-up pages. After you click the button, you will be redirected to the Okta login page, or automatically signed in if you are already logged in to Okta.
 ## Key Features of Open WebUI ⭐
 
 - 🚀 **Effortless Setup**: Install seamlessly using Docker or Kubernetes (kubectl, kustomize or helm) for a hassle-free experience with support for both `:ollama` and `:cuda` tagged images.
