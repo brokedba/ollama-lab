@@ -194,21 +194,30 @@ ingress:
 The process of enabling Okta as the identity manager for Open WebUI consists of several steps:
 Customize the configuration to your specific scenario and refer to the Okta documentation at https://help.okta.com/en-us/content/index.htm?cshid=csh-index for more information.
 # 1. Configuring Okta
-  - Log in to Okta and access the Admin panel.
+  - Log in to [Okta](https://login.okta.com/) and access the Admin panel.
   - Go to Applications Create App Integration.
   - In the Sign-in method section, select OIDC - OpenID Connect. In the Application type section,select Web Application. Click Next to proceed.
   - In the General Settings section, set the App integration name to Open WebUI. In the Grant type section, toggle the Refresh token option. Optionally, specify an image for the application logo.
 - Set Sign-in redirect URIs to the callback URI, for example, `http://localhost:8080/oauth/oidc/callback` . The URI follows this pattern:
-`PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER/oauth/oidc/callback`
+```
+PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER/oauth/oidc/callback
+```
 - Similarly, set Sign-out redirect URIs to `PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER`
 - In the Assignments section, toggle the Skip group assignment for now option. Save changes.
 - In the General Settings section, click Edit and in the Login section, set the Sign-in redirect URIs option to the URI in this format:
-`PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER/oauth/oidc/callback`
+
+```
+PROTOCOL://OPENWEBUI_DOMAIN:OPTIONAL_PORT_NUMBER/oauth/oidc/callback
+```
+
 9. In the Login initiated by section, select App Only. Confirm with Save
 # 3. Gathering data for Open WebUI configuration
 In the top-right menu, copy the Okta domain. In this example, it is my-domain.okta.com .
+
 ![image](https://github.com/user-attachments/assets/a5c66a0a-9fc3-4f6c-b15c-299d1b7b2b3b)
+
 Go to Applications Open WebUI and retrieve the Client ID and Client Secret.
+
 ![image](https://github.com/user-attachments/assets/91c35c42-77b2-4a9b-aca8-6ab37d3f2657)
 
 # 4. Configuring Open WebUI for Okta integration
@@ -225,6 +234,12 @@ OPENID_PROVIDER_URL=OKTA_DOMAIN/.well-known/openid-configuration
 OAUTH_PROVIDER_NAME=Okta
 OAUTH_SCOPES=openid email profile 
 ```
+- **OKta well-known URL** : In this example, the well-known URL becomes:
+```
+https://dev-84941762.okta.com/.well-known/openid-configuration
+```
+The domain is `dev-84941762.okta.com`.
+
 The code block should look as follows:
 ```YAML 
 extraEnvVars:
