@@ -3,12 +3,16 @@ Deploy your Local LLM Web App in Kubernetes using Ollama and OpenWebUI
 <p align="center">
   <img src="image/image.png" alt="streamlit" width="100"/>
 </p>
-**Phase I**
+ 
+ - **Phase I** 
 <p align="center">
   <img src="image/ollama_streamlit.png" alt="streamlit" width="700"/>
 </p>
-**Phase II**
 
+- **Phase II**
+<p align="center">
+  <img src="image/ollama_k8s.png" alt="streamlit" width="700"/>
+</p>
 # Table of Contents
 1. [OLLAMA and LLMs](#ollama)
 2. [Designing the Chatbot](#designing-the-chatbot)
