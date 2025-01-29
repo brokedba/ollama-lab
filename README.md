@@ -13,6 +13,7 @@ Deploy your Local LLM Web App in Kubernetes using Ollama and OpenWebUI
 <p align="center">
   <img src="image/ollama_k8s.png" alt="streamlit" width="700"/>
 </p>
+
 # Table of Contents
 1. [OLLAMA and LLMs](#ollama)
 2. [Designing the Chatbot](#designing-the-chatbot)
@@ -84,7 +85,24 @@ ollama list
  ```
 ollama rm llama2-uncensored
 ```
+**New**
+With Ollama You can now run private GGUFs from the Hugging Face Hub.
+```bash
+ollama run hf.co/{username}/{repository}:{quantization}
+```
+- example with GGUF model [QWEN 2.5 4Q_K_M](https://huggingface.co/bartowski/Qwen2-VL-7B-Instruct-GGUF/blob/main/Qwen2-VL-7B-Instruct-Q4_K_M.gguf) and [Deepseek-R1](https://huggingface.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF/blob/main/DeepSeek-R1-Distill-Llama-8B-Q4_K_M.gguf)
 
+```
+ollama pull hf.co/bartowski/Qwen2-VL-7B-Instruct-GGUF:Q4_K_M
+ollama pull hf.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF:Q4_K_M
+```
+Note: 
+> By default, the Q4_K_M quantization scheme is used, when it’s present inside the model repo. If not, we default to picking one reasonable quant type present inside the repo.
+
+[*Custom Chat Template and Parameters*](https://huggingface.co/docs/hub/en/ollama#custom-chat-template-and-parameters)
+- tempate : create `template` file inside repo. must be a Go template,
+- system prompt : create a `system` file inside the repo.
+- param : create a `parameters` file inside the repo. The file must be in JSON format. For the list of all available parameters, please refer to [documentation](https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter).
 ### Examples
 
 #### Generate request (Streaming)
@@ -152,7 +170,8 @@ To calculate how fast the response is generated in tokens per second (token/s), 
    - smallest => [llama-2–7b-chat.Q2_K.gguf](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/tree/main#:~:text=llama%2D2%2D7b%2Dchat.Q2_K.gguf) which is the most compressed version of the 7B chat model and requires the least resources.
 
 - llama3.1: GGUF models are also available thanks to accounts like [Bartowski](https://huggingface.co/bartowski) with his [Meta-Llama-3.1-8B-Instruct-GGUF](https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF) model  
- 
+ - QWEN VL 2.5 : quantized models available here [Qwen2-VL-7B-Instruct-GGUF ](https://huggingface.co/bartowski/Qwen2-VL-7B-Instruct-GGUF/blob/main/Qwen2-VL-7B-Instruct-Q4_K_M.gguf)
+ - Deepseek R1: quantized [unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF ](https://huggingface.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF)
  
 # Designing the Chatbot: 
 - Guidelines on designing the chatbot's functionality, including understanding user inputs, generating responses, and handling different types of conversations.
