@@ -173,6 +173,26 @@ To calculate how fast the response is generated in tokens per second (token/s), 
  - QWEN VL 2.5 : quantized models available here [Qwen2-VL-7B-Instruct-GGUF ](https://huggingface.co/bartowski/Qwen2-VL-7B-Instruct-GGUF/blob/main/Qwen2-VL-7B-Instruct-Q4_K_M.gguf)
  - Deepseek R1: quantized [unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF ](https://huggingface.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF)
  
+--------
+# Multimodal Vision Language Models
+**text to Image**
+- [1111 DirectML](https://github.com/LykosAI/StabilityMatrix?tab=readme-ov-file)
+ list see [link] (https://medium.com/ai-bytes/top-6-open-source-text-to-image-generation-models-in-2024-ee5a2fc39046)
+ - DeepFloyd IF
+ - Stable Diffusion v1–5
+ - [OpenJourney] (https://github.com/paddleboard-ai/useful-notebooks/blob/main/LocalJourney_CPU.ipynb)
+ - DreamShaper
+ - Dreamlike Photoreal
+ - Waifu Diffusion
+
+# Vision Models (GGUF)
+- [Llava 1.6](https://huggingface.co/cmp-nct/llava-1.6-gguf): llama.cpp now natively supported
+- [Bakllava](https://huggingface.co/advanced-stack/bakllava-mistral-v1-gguf)
+- ShareGPT4V
+- Obsidian
+- Yi-VL
+
+
 # Designing the Chatbot: 
 - Guidelines on designing the chatbot's functionality, including understanding user inputs, generating responses, and handling different types of conversations.
 
@@ -517,24 +537,3 @@ Access your Streamlit app in the browser via http://[external-ip].
 Ensure your oci-cli is configured correctly to manage your container registry and Kubernetes cluster.
 Set the proper permissions and policies within OCI to allow your Kubernetes cluster to pull images from your container registry.
 Secure sensitive data using Kubernetes secrets or a secure mechanism; never include it in your Dockerfile or image.
-
-
-
---------
-# Multimodal Vision Language Models
-**text to Image**
-- [1111 DirectML](https://github.com/LykosAI/StabilityMatrix?tab=readme-ov-file)
- list see [link] (https://medium.com/ai-bytes/top-6-open-source-text-to-image-generation-models-in-2024-ee5a2fc39046)
- - DeepFloyd IF
- - Stable Diffusion v1–5
- - [OpenJourney] (https://github.com/paddleboard-ai/useful-notebooks/blob/main/LocalJourney_CPU.ipynb)
- - DreamShaper
- - Dreamlike Photoreal
- - Waifu Diffusion
-
-# Vision Models (GGUF)
-- [Llava 1.6](https://huggingface.co/cmp-nct/llava-1.6-gguf): llama.cpp now natively supported
-- [Bakllava](https://huggingface.co/advanced-stack/bakllava-mistral-v1-gguf)
-- ShareGPT4V
-- Obsidian
-- Yi-VL
