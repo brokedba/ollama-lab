@@ -173,7 +173,7 @@ To calculate how fast the response is generated in tokens per second (token/s), 
  - QWEN VL 2.5 : quantized models available here [Qwen2-VL-7B-Instruct-GGUF ](https://huggingface.co/bartowski/Qwen2-VL-7B-Instruct-GGUF/blob/main/Qwen2-VL-7B-Instruct-Q4_K_M.gguf)
  - Deepseek R1: quantized [unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF ](https://huggingface.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF)
  
---------
+---
 # Multimodal Vision Language Models
 **text to Image**
 - [1111 DirectML](https://github.com/LykosAI/StabilityMatrix?tab=readme-ov-file)
@@ -192,7 +192,7 @@ To calculate how fast the response is generated in tokens per second (token/s), 
 - Obsidian
 - Yi-VL
 
-
+--------
 # Designing the Chatbot: 
 - Guidelines on designing the chatbot's functionality, including understanding user inputs, generating responses, and handling different types of conversations.
 
