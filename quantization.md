@@ -1,7 +1,7 @@
 
 # Table of Contents
 1. [LLAMA and LLMs](#llama)
-2. [Quantization](#quantizatio)
+2. [Quantization](#quantization)
 3. [llama.cpp](#llamacpp)
    - [GGML](#ggml-georgi-gerganov-machine-learning)
    - [GGUF](#gguf-gpt-generated-unified-format)
