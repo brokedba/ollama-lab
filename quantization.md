@@ -10,7 +10,7 @@
 5. [Recommendations](#Recommendations)
 6. [Grouped Query Attention GQA](#Grouped-Query-Attention-GQA)
 
-# Lamma
+# Llama
 ![image](https://github.com/user-attachments/assets/af7512a6-3834-45f7-aa52-2fcb8e902950)
 
 Llama is an Open Source Large Language Model released by Meta. It’s a chat model from 7 to 70 billions parameters (llama could go up to 400B) trained on a massive dataset of text from the internet.
