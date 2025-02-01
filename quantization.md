@@ -1,12 +1,4 @@
 
-# Reference
-
-- [the_difference_between_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/159nrh5/the_difference_between_quantization_methods_for/)
-- [llama.cpp](https://github.com/ggerganov/llama.cpp/discussions/2094)
-- [overview_of_gguf_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/1ba55rj/overview_of_gguf_quantization_methods/)
-- [my_head_is_spinning_with_all_the_quantization](https://www.reddit.com/r/LocalLLaMA/comments/143ozbn/my_head_is_spinning_with_all_the_quantization/)
-- [gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu](https://towardsdatascience.com/gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu-02356b531926)
-
 # Table of Contents
 1. [LLAMA and LLMs](#llama)
 2. [Quantization](#quantizatio)
@@ -144,3 +136,11 @@ The following table summarizes the performance results (perplexity, model size, 
 
 **Quality**: Achieves a quality close to multi-head attention (MHA) by balancing between multi-query attention (MQA) and MHA.
 **Speed**: Maintains a speed comparable to MQA, faster than MHA, by using an intermediate number of key-value heads.
+
+# Reference
+
+- [the_difference_between_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/159nrh5/the_difference_between_quantization_methods_for/)
+- [llama.cpp](https://github.com/ggerganov/llama.cpp/discussions/2094)
+- [overview_of_gguf_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/1ba55rj/overview_of_gguf_quantization_methods/)
+- [my_head_is_spinning_with_all_the_quantization](https://www.reddit.com/r/LocalLLaMA/comments/143ozbn/my_head_is_spinning_with_all_the_quantization/)
+- [gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu](https://towardsdatascience.com/gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu-02356b531926)
