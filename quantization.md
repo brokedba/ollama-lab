@@ -17,14 +17,76 @@ Llama is an Open Source Large Language Model released by Meta. It’s a chat mod
 # Quantization: 
 Quantization involves reducing the precision of a model's weights and activations from floating-point numbers to integers, beneficial for deploying models on resource-limited devices to enhance computational efficiency and reduce memory usage.
 
+**The Two Types of LLM Quantization: PTQ and QAT**
+- **Post-Training Quantization (PTQ)**: Faster less training data with reduced accuracy from lost precision in the value of the weights. 
+- **Quantization-Aware Training (QAT)**: fine-tuning on data with quantization in mind by integrating weight convertion, during the training stage. 
+   
+**What are Scaling Factors?**
+
+Scaling factors are multipliers used to map low-precision quantized values (like 4-bit integers) back to their original floating-point range.
+They ensure that quantized values approximate the original floating-point weights as closely as possible, reducing the accuracy loss during quantization.
+- Example: A weight value `w` is stored as a `4-bit` integer `q`, and its approximation is calculated as:
+  ```bash
+  w  ≈ q × s
+  ```
+ Where `s` is the scaling factor.
+
+ **Difference Between Q4_0 and Q4_1 Scaling:**
+- `Q4_0`: One scaling factor per block of weights. To approximate the original floating-point precision of these weights
+- `Q4_1`: Two scaling factors per block—one for most weights and an additional one for outliers.
+
 - Below is a representation of acuracy loss from 32bit to 16bits Bfloat16
-![image](https://github.com/user-attachments/assets/8d64447a-41ca-474d-8ef8-9e35c85a9121)
-```
-formula for 8int(8bits) :is taking the highest value of the weight matrix divide it by  
-```
-![image](https://github.com/user-attachments/assets/aee5874a-4699-452f-9a26-9496caffa7ce)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8d64447a-41ca-474d-8ef8-9e35c85a9121" alt="streamlit" width="400"/>
+</p>
+
+**Fixed-Point Quantization:**
+is a quantization where the values are scaled to integers and interpreted as fixed-point numbers.
+- Efficient for integer-only inference (e.g., in embedded systems).
+
+**Key Differences**
+| Aspect            | Q4_0/Q4_1                | INT8                        | Fixed-Point              |
+|------------------|------------------------|-----------------------------|--------------------------|
+| **Precision**    | 4 bits                  | 8 bits                      | Depends on fixed-point size |
+| **Scaling Factors** | Per block (Q4_1 has two) | Per layer or tensor         | Fixed scaling, predefined |
+| **Accuracy**     | Lower                   | Higher                       | Lower                     |
+| **Memory Use**   | Very low (4 bits)       | Moderate (8 bits)            | Moderate                   |
+| **Use Case**     | Extreme compression     | General-purpose quantization | Embedded systems           |
 
 
+```
+formula for scaling Factor 8int(8bits) : is taking the max value of the weight matrix and divide it by max 8bit positive value [127]
+The new quantized value of each matrix value = round (value  x scaling factor)
+  
+```
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/aee5874a-4699-452f-9a26-9496caffa7ce" alt="streamlit" width="300"/>
+</p>
+
+**Zero Point in Quantization?**
+
+A zero point is a value used in asymmetric quantization to map floating-point numbers into integer values while preserving the range and scale. It allows quantized values to represent both positive and negative numbers using unsigned integers (e.g., INT8).
+
+**INT8 quantized models** use zero points to represent signed numbers. 
+while floating-point values also include negative numbers. The zero point helps shift the quantized values so that zero in the floating-point range aligns with a specific integer (the middle of the dynamic range).
+
+- Int8 Quantization Formula (With Zero Point)
+```
+q=round(x/s +z)
+```
+- `q` → Quantized integer value (e.g., INT8)
+- `x` → Original floating-point value
+- `s` → Scaling factor (determines how much precision is lost)
+- `z` → Zero point (integer offset that aligns 0 in floating-point with an integer value)
+
+If a model’s floating-point range is `[-2.5, 2.5]`, and we map it to an 8-bit integer (`0-255`):
+- Scaling factor (s): `0.02`
+- Zero point (z): `128` (aligns 0 in floating-point with the INT8 range)
+- For a value x = `-2.5` :
+```yaml
+𝑞  = (−2.5 /0.02 )+ 128 = 0
+-- same for 2.5  =>  (2.5/0.02)+128=0
+```
 # Model Quantization Naming Convention:
 Quantization methods are denoted by  **"Q[Number]_K_Size"**.
 - `"Q[Number]"` represents the bit depth of quantization.
@@ -32,11 +94,10 @@ Quantization methods are denoted by  **"Q[Number]_K_Size"**.
 - `"Size"` indicates the size of the model, with `"S"` for small, `"M"` for medium, and `"L"` for large.
 
 # llama.cpp:
-- The `llama.cpp` is a C++ library for efficient inference of (LLMs) performing custom quantization approach to compress the models in a **GGUF format** developed by[ Georgi Gerganov](https://github.com/ggerganov).
+The `llama.cpp` is a C++ library for efficient inference of (LLMs) performing custom quantization approach to compress the models in a **GGUF format** developed by[ Georgi Gerganov](https://github.com/ggerganov).
 - This reduces the size and resources needed.
 - many inference engines (`ollama/vllm`) use `llama.cpp` under the hood to enable on-device LLM
-- ![image](https://github.com/user-attachments/assets/6f07f80b-50b2-49c7-811b-c827cf2b8f42)
-
+- `llama.cpp` readz models saved in the `.GGML` or `.GGUF` format and enables them to run on CPU devices or GPUs. 
 - Serving as a port of meta's LLaMA model, `llama.cpp` extends accessibility to a broader audience.
 - allow `CPU+GPU` hybrid inference to accelerate models larger than total VRAM capacity.
 - Various quantization options (`1.5-bit` to `8-bit` integer) for faster inference and reduced memory usage.
@@ -53,9 +114,9 @@ GGML is a C Tensor library designed for deploying (LLMs) on consumer hardware wi
 GGML is also the binary file format used to store these quantized models, often referred to as the "GGML format" which is a binary format for distributing LLMs. It contains all necessary information to load a model. 
 
 # GGUF (GPT-Generated Unified Format):
-GGUF is a file format designed for efficient storage and fast LLM inference, Introduced as a successor to GGML forat.
+GGUF is a file format designed for efficient storage and fast LLM inference, Introduced as a successor to GGML format.
 - GGUF encapsulates all necessary components for inference, including the `tokenizer` and `code`, within a single file.
-- It supports the conversion of various LLMs(Llama 3, Phi, etc).
+- Adds support for the conversion of **non-Llama** models.
 - Additionally, it facilitates model quantization to lower precisions to improve speed and memory efficiency on CPUs.
 
 **GGUF advantages over GGML:**
@@ -77,13 +138,17 @@ We often write “GGUF quantization” but GGUF itself is only a file format, no
 
 # K-Quants (Q3_K_S, Q5_K_M, ...):
 K qants were Introduced in llama.cpp PR [#1684](https://github.com/ggerganov/llama.cpp/pull/1684).
+- It uses different bit widths depending on the chosen quant method. 
 - Bits allocated more intelligently compared to legacy/interger quants.
+- `Q4_K` The [weights](https://github.com/ggerganov/llama.cpp/pull/1684) superblocks of 8 blocks of 32 weights: with each block having one scaling factor based on the largest weight value
 - Supports different quantization types and sizes, offering lower quantization error.
+- the most important weights are quantized to a higher-precision data type, while the rest are assigned to a lower-precision type.
+   -  For example, the q2_k quant method converts the largest weights to 4-bit integers and the remaining weights to 2-bit. 
 
 **New K-Quant Methods:**
 - `GGML_TYPE_Q2_K`: 2-bit quantization with intelligent allocation of bits.
 - `GGML_TYPE_Q3_K`: 3-bit quantization with improved quantization techniques.
-- `GGML_TYPE_Q4_K`: 4-bit quantization with optimized block structures.
+- `GGML_TYPE_Q4_K`: 4-bit quantization with optimized block structures. result in 4.5 bitperweight.
 - `GGML_TYPE_Q5_K`: 5-bit quantization for increased precision.
 - `GGML_TYPE_Q6_K`: 6-bit quantization with advanced features.
 - `GGML_TYPE_Q8_K`: 8-bit quantization for intermediate results with efficient dot product implementations.
