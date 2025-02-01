@@ -4,11 +4,11 @@
 2. [Quantization](#quantizatio)
 3. [llama.cpp](#lama.cpp)
    - [GGML](#GGML (Georgi Gerganov Machine learning))
-   - [GGUF](#GGUF)
-4. [Supported Quantization Methods](#Supported Quantization Methods)
+   - [GGUF](#gguf-gpt-generated-unified-form)
+4. [Supported Quantization Methods](#Supported-Quantization-Methods)
    - [Perplexity](#Perplexity)
 5. [Recommendations](#Recommendations)
-6. [Grouped Query Attention GQA](#Grouped Query Attention GQA)
+6. [Grouped Query Attention GQA](#Grouped-Query-Attention-GQA)
 
 # Lamma
 ![image](https://github.com/user-attachments/assets/af7512a6-3834-45f7-aa52-2fcb8e902950)
