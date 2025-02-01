@@ -17,6 +17,9 @@ Llama is an Open Source Large Language Model released by Meta. It’s a chat mod
 # Quantization: 
 Quantization involves reducing the precision of a model's weights and activations from floating-point numbers to integers, beneficial for deploying models on resource-limited devices to enhance computational efficiency and reduce memory usage.
 
+- Below is a representation acuracy loss from 32bit to 16bits
+![image](https://github.com/user-attachments/assets/8d64447a-41ca-474d-8ef8-9e35c85a9121)
+
 # Model Quantization Naming Convention:
 Quantization methods are denoted by  **"Q[Number]_K_Size"**.
 - `"Q[Number]"` represents the bit depth of quantization.
