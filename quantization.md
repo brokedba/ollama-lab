@@ -19,6 +19,11 @@ Quantization involves reducing the precision of a model's weights and activation
 
 - Below is a representation of acuracy loss from 32bit to 16bits Bfloat16
 ![image](https://github.com/user-attachments/assets/8d64447a-41ca-474d-8ef8-9e35c85a9121)
+```
+formula for 8int(8bits) :is taking the highest value of the weight matrix divide it by  
+```
+![image](https://github.com/user-attachments/assets/aee5874a-4699-452f-9a26-9496caffa7ce)
+
 
 # Model Quantization Naming Convention:
 Quantization methods are denoted by  **"Q[Number]_K_Size"**.
@@ -144,6 +149,7 @@ The following table summarizes the performance results (perplexity, model size, 
 
 # Reference
 
+- [Quantization guide for LLMs](https://symbl.ai/developers/blog/a-guide-to-quantization-in-llms/)
 - [the_difference_between_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/159nrh5/the_difference_between_quantization_methods_for/)
 - [llama.cpp](https://github.com/ggerganov/llama.cpp/discussions/2094)
 - [overview_of_gguf_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/1ba55rj/overview_of_gguf_quantization_methods/)
