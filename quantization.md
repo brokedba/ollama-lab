@@ -27,6 +27,8 @@ Quantization methods are denoted by  **"Q[Number]_K_Size"**.
 - The `llama.cpp` is a C++ library for efficient inference of (LLMs) performing custom quantization approach to compress the models in a **GGUF format** developed by[ Georgi Gerganov](https://github.com/ggerganov).
 - This reduces the size and resources needed.
 - many inference engines (`ollama/vllm`) use `llama.cpp` under the hood to enable on-device LLM
+- ![image](https://github.com/user-attachments/assets/6f07f80b-50b2-49c7-811b-c827cf2b8f42)
+
 - Serving as a port of meta's LLaMA model, `llama.cpp` extends accessibility to a broader audience.
 - allow `CPU+GPU` hybrid inference to accelerate models larger than total VRAM capacity.
 - Various quantization options (`1.5-bit` to `8-bit` integer) for faster inference and reduced memory usage.
@@ -144,4 +146,7 @@ The following table summarizes the performance results (perplexity, model size, 
 - [overview_of_gguf_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/1ba55rj/overview_of_gguf_quantization_methods/)
 - [my_head_is_spinning_with_all_the_quantization](https://www.reddit.com/r/LocalLLaMA/comments/143ozbn/my_head_is_spinning_with_all_the_quantization/)
 - [gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu](https://towardsdatascience.com/gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu-02356b531926)
-- [4bit quantization explanation](https://www.youtube.com/watch?v=mii-xFaPCrA&t=5s) 
+- [GPTQ 4bit quantization explanation](https://www.youtube.com/watch?v=mii-xFaPCrA&t=5s)
+
+ ![image](https://github.com/user-attachments/assets/e872b259-bb9d-468c-879d-5a6d380a0c22)
+
