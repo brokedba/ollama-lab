@@ -144,3 +144,4 @@ The following table summarizes the performance results (perplexity, model size, 
 - [overview_of_gguf_quantization_methods](https://www.reddit.com/r/LocalLLaMA/comments/1ba55rj/overview_of_gguf_quantization_methods/)
 - [my_head_is_spinning_with_all_the_quantization](https://www.reddit.com/r/LocalLLaMA/comments/143ozbn/my_head_is_spinning_with_all_the_quantization/)
 - [gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu](https://towardsdatascience.com/gguf-quantization-with-imatrix-and-k-quantization-to-run-llms-on-your-cpu-02356b531926)
+- [4bit quantization explanation](https://www.youtube.com/watch?v=mii-xFaPCrA&t=5s) 
