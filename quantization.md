@@ -41,7 +41,7 @@ They ensure that quantized values approximate the original floating-point weight
 </p>
 
 **Fixed-Point Quantization:**
-is a quantization where the values are scaled to integers and interpreted as fixed-point numbers.
+- is a quantization where the values are scaled to integers and interpreted as fixed-point numbers.
 - Efficient for integer-only inference (e.g., in embedded systems).
 
 **Key Differences**
