@@ -68,7 +68,7 @@ The new quantized value of each matrix value = round (value  x scaling factor)
 A zero point is a value used in asymmetric quantization to map floating-point numbers into integer values while preserving the range and scale. It allows quantized values to represent both positive and negative numbers using unsigned integers (e.g., INT8).
 
 **INT8 quantized models** use zero points to represent signed numbers. 
-while floating-point values also include negative numbers. The zero point helps shift the quantized values so that zero in the floating-point range aligns with a specific integer (the middle of the dynamic range).
+- while floating-point values also include negative numbers. The zero point helps shift the quantized values so that zero in the floating-point range aligns with a specific integer (the middle of the dynamic range).
 
 - Int8 Quantization Formula (With Zero Point)
 ```
@@ -140,7 +140,8 @@ We often write “GGUF quantization” but GGUF itself is only a file format, no
 K qants were Introduced in llama.cpp PR [#1684](https://github.com/ggerganov/llama.cpp/pull/1684).
 - It uses different bit widths depending on the chosen quant method. 
 - Bits allocated more intelligently compared to legacy/interger quants.
-- `Q4_K` The [weights](https://github.com/ggerganov/llama.cpp/pull/1684) superblocks of 8 blocks of 32 weights: with each block having one scaling factor based on the largest weight value
+- `Q4_K` The [weights](https://github.com/ggerganov/llama.cpp/pull/1684) superblocks of 8 blocks of 32 weights: with each block having one scaling factor based on the max weight value
+- 1 scaling factor per block and an extra scaling factor per superblock:for outliers
 - Supports different quantization types and sizes, offering lower quantization error.
 - the most important weights are quantized to a higher-precision data type, while the rest are assigned to a lower-precision type.
    -  For example, the q2_k quant method converts the largest weights to 4-bit integers and the remaining weights to 2-bit. 
