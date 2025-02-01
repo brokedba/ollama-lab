@@ -3,7 +3,7 @@
 1. [LLAMA and LLMs](#llama)
 2. [Quantization](#quantizatio)
 3. [llama.cpp](#lama.cpp)
-   - [GGML](#GGML (Georgi Gerganov Machine learning))
+   - [GGML](ggml-georgi-gerganov-machine-learning)
    - [GGUF](#gguf-gpt-generated-unified-form)
 4. [Supported Quantization Methods](#Supported-Quantization-Methods)
    - [Perplexity](#Perplexity)
