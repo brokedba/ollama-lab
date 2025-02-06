@@ -69,7 +69,6 @@ network_id = "33161f60-ed86-4f45-903b-94b7959fc991"
 - Once you click on the loadbalancer dns link you will have the below page:
 ![image](https://github.com/user-attachments/assets/9367e8db-8888-4b10-8768-13e3cfc737ca)
 
-
 # 4️⃣ Destroying the Infrastructure
 To delete everything:
 ```
@@ -81,3 +80,17 @@ terraform destroy -auto-approve
 - Optimize Autoscaling for Traffic Spikes
 
 ----
+# **Okta**
+
+ There is a bit of catch 22 problem here. The smartest way to do this is to follow these steps:
+ 1. Register a Web App in Okta with temporary redirect URIs. Guide: 🔗 Okta OIDC Web App Setup
+ 2. Get client_id & client_secret, then adjust them in the env-vars accordingly:
+ 3. Deploy terraform config
+ 4. After Terraform assigns loadbalancer_dns, update Okta Web App settings:
+  - Sign-in redirect URI → `<loadbalancer_dns>/oauth/oidc/callback`
+  - Sign-out redirect URI → `<loadbalancer_dns>`
+  
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/5f8a8b29-5692-4b56-a64a-37e68b28dc27" alt="streamlit" width="500"/>
+</p>
+
