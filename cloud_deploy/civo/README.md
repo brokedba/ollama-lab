@@ -89,8 +89,8 @@ terraform destroy -auto-approve
  4. After Terraform assigns loadbalancer_dns, update Okta Web App settings:
   - Sign-in redirect URI → `<loadbalancer_dns>/oauth/oidc/callback`
   - Sign-out redirect URI → `<loadbalancer_dns>`
-  
+
  <p align="center">
-  <img src="https://github.com/user-attachments/assets/5f8a8b29-5692-4b56-a64a-37e68b28dc27" alt="streamlit" width="500"/>
+  <img src="https://github.com/user-attachments/assets/52fde29a-fdb8-489f-8836-66dad1db3ab0" alt="streamlit" width="500"/>
 </p>
 
