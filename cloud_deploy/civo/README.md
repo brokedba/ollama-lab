@@ -49,6 +49,27 @@ $ source env-vars
 terraform plan
 terraform apply
 ```
+#**Final Output preview**#
+```hcl
+Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
+Outputs:
+cluster_installed_applications = tolist([])
+kubernetes_cluster_endpoint = "https://212.2.111.111:6443"
+kubernetes_cluster_id = "d19dd60f-111-111-1111-529c8a1a5299"
+kubernetes_cluster_name = "cloudthrill-cluster"
+kubernetes_cluster_ready = true
+kubernetes_cluster_status = "ACTIVE"
+kubernetes_cluster_version = "talos-v1.5.0"
+loadbalancer_dns = {
+  "hostname" = "https://random-50a0-4ade-af55-9b253d0b5c8b.lb.civo.com" <---  use this link to log in 
+}
+master_ip = "212.2.111.111"
+network_id = "33161f60-ed86-4f45-903b-94b7959fc991"
+```
+- Once you click on the loadbalancer dns link you will have the below page:
+![image](https://github.com/user-attachments/assets/9367e8db-8888-4b10-8768-13e3cfc737ca)
+
+
 # 4️⃣ Destroying the Infrastructure
 To delete everything:
 ```
