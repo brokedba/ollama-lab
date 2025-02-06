@@ -94,3 +94,6 @@ terraform destroy -auto-approve
   <img src="https://github.com/user-attachments/assets/52fde29a-fdb8-489f-8836-66dad1db3ab0" alt="streamlit" width="500"/>
 </p>
 
+- if the first user is logged in from okta it will also be an admin
+- if not then you will first need to create an non admin group with default permissions (i.e everyone) and the you can get the okta user added to it
+![image](https://github.com/user-attachments/assets/5290e6be-9bed-4260-9f18-1d1667d5efce)
