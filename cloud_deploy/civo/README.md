@@ -1,4 +1,7 @@
 # 🚀 LLM Inference Deployment on Civo Cloud Talos K8s Cluster
+<p align="center">
+  <img src="../../image/ollama_k8s.png" alt="streamlit" width="700"/>
+</p>
 
 ## **Overview**
 This repository provides an end-to-end solution for deploying a **local LLM (Large Language Model) inference** setup on a **Civo Cloud Talos Kubernetes Cluster**. 
