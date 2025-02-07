@@ -1,0 +1,7 @@
+export CIVO_TOKEN="your-civo-api-key"
+export TF_VAR_region="NYC1"
+#### [OKTA] Optional ##################
+export TF_VAR_okta_client_id="your-okta-client-id"
+export TF_VAR_okta_client_secret="your-okta-client-secret"
+export TF_VAR_okta_openid_provider="https://your-okta-domain/oauth2/default"
+export TF_VAR_enable_okta="true"
