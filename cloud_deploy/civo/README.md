@@ -30,8 +30,14 @@ Before you begin, ensure you have the following:
 ---
 
 ## **2️⃣ Setup Civo Kubernetes Cluster (Talos)**
+**Clone the repository**
+- cd to the civo sub-directory: 
+  ```bash
+  $ cd ollama_lab/cloud_deploy/civo/
 
-### Use an env-vars File**
+  ```
+**Use an env-vars File**
+
 Export your **TF_VARS** i.e **Civo API Key** in the env-vars file :
 ```bash
 export CIVO_TOKEN="your-civo-api-key"
