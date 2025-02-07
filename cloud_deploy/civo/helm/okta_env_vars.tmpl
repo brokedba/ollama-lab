@@ -1,0 +1,15 @@
+extraEnvVars:
+  - name: ENABLE_OAUTH_SIGNUP
+    value: "True"
+  - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+    value: "True"
+  - name: OAUTH_CLIENT_ID
+    value: "${OAUTH_CLIENT_ID}"
+  - name: OAUTH_CLIENT_SECRET
+    value: "${OAUTH_CLIENT_SECRET}"
+  - name: OPENID_PROVIDER_URL
+    value: "${OPENID_PROVIDER_URL}"
+  - name: OAUTH_PROVIDER_NAME
+    value: "Okta"
+  - name: OAUTH_SCOPES
+    value: "openid email profile"

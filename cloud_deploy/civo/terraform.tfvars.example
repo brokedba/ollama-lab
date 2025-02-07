@@ -1,0 +1,11 @@
+# Civo Configuration
+civo_token            = "your-civo-api-key"
+region                = "NYC1"
+
+# Okta Configuration (Optional)
+okta_client_id        = "your-client-id"
+okta_client_secret    = "your-client-secret"
+okta_openid_provider  = "https://your-okta-domain/oauth2/default"
+
+# Feature Flags
+enable_okta           = true

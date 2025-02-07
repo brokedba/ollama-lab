@@ -1,0 +1,71 @@
+# Open WebUI Helm values
+nameOverride: ""
+
+ollama:
+  enabled: false
+
+ollamaUrls:
+  - "http://ollama.ollama.svc.cluster.local:11434"
+
+pipelines:
+  enabled: true
+# -- Value of cluster domain
+clusterDomain: cluster.local
+
+annotations: {}
+podAnnotations: {}
+replicaCount: 1
+
+image:
+  repository: ghcr.io/open-webui/open-webui
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+imagePullSecrets: []
+
+# -- Node labels for pod assignment.
+nodeSelector: {}
+#  role: openwebui
+
+# -- Tolerations for pod assignment
+tolerations: []
+
+# -- Affinity for pod assignment
+affinity: {}
+
+ingress:
+  enabled: true
+  class: "traefik"
+  annotations:
+  kubernetes.io/ingress.class: traefik
+  cert-manager.io/cluster-issuer: self-signed-cluster-issuer # self-signdIssuer
+  host: ""  #"${dns_entry}"  # Placeholder
+  tls: false  # true for TLS
+  existingSecret: "openwebui-tls-secret"
+
+persistence:
+  enabled: true
+  size: 5Gi
+  # -- Use existingClaim to re-use an existing WebUI PVC instead of a new one
+  existingClaim: ""
+  # -- If using multiple replicas, update accessModes to ReadWriteMany
+  accessModes:
+    - ReadWriteOnce
+  storageClass: ""
+  selector: {}
+  annotations: {}
+
+service:
+  type: ClusterIP  # Change service type to LoadBalancer
+  annotations: {}
+  port: 80
+  containerPort: 8080
+  loadBalancerIP: ""  # leave this empty or specify a static IP if required
+  labels: {}
+  loadBalancerClass: ""
+
+# extraEnvVars:
+#   - name: OPENAI_API_KEY
+#     value: "0p3n-w3bu!"
+
+podSecurityContext: {}
+containerSecurityContext: {}
