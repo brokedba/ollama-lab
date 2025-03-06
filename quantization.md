@@ -211,9 +211,75 @@ The following table summarizes the performance results (perplexity, model size, 
 - GQA is employed in many ML libraries like `llama.cpp` , **HuggingFace** transformers (custom models), Vllm , llama models,  
 
 **Quality**: Achieves a quality close to multi-head attention (MHA) by balancing between multi-query attention (MQA) and MHA.
-**Speed**: Maintains a speed comparable to MQA, faster than MHA, by using an intermediate number of key-value heads.
+**Speed**: Maintains a speed comparable to MQA, faster than MHA, by using an intermediate number of key-value heads
+
+# MoE (Mixture of Experts/Sparse) vs. Dense Transformers
+Deepseek are all based on the MoE architecture, but let’s first understand the difference between the **MoE architecture** (**Sparse** model) and the **traditional** Transformer architecture (**Dense** model ):
+
+# Dense Model (Traditional Transformers):
+![image](https://github.com/user-attachments/assets/d17f3086-754d-4559-aa80-2bb49e69ca17)
+
+- All parameters are active for every input.
+- Fully connected layers process all tokens without specialization.
+
+**Example**: Standard Transformer models (e.g., GPT, BERT).
+  
+# MoE Model (Mixture of Experts – Sparse Transformers):
+
+The core idea of the MoE model is to design multiple “experts” (sub-networks) within the model, and use a gating mechanism to activate only a portion of the experts for each input or token. 
+This is used at training and inference level.
+![image](https://github.com/user-attachments/assets/6c4abf6b-37a0-4f36-b1f6-577533b00186)
+
+
+- Uses multiple “experts” (sub-networks), but only activates a few per token.
+- Gating mechanism decides which experts handle each input.
+- More parameters but fewer used at once, making it efficient yet powerful.
+  
+**Why MoE?**
+
+✅ Large-Scale model Parameter Expansion (more total parameters).
+
+✅ Lower computational cost (only a small fraction of parameters used per token).
+
+✅ Faster inference due to selective activation.
+
+✅ improving model generation quality under limited computing resources. 
+
+**Example (Deepseek Models):**
+- Deepseek V2: 236B parameters total, but only 21B used per input.
+- Deepseek V3: 671B parameters, only 37B actively used.
+
+🚀 **TL;DR:** MoE uses expert sub-networks selectively, making it scalable and efficient, unlike dense models that activate all parameters for every token.
+
 # MOE VS MLA
 ![image](https://github.com/user-attachments/assets/5734164f-f9a3-4d0f-a7bc-93bb173ac5ac)
+Major architecture innovations in DeepSeek-V3 include
+- MLA (Multi-head Latent Attention)
+- DeepSeekMoE
+- auxiliary-loss-free load balancing
+- multi-token prediction training.
+
+**MLA (Memory Latent Attention)**
+
+🔹**What It Does**:
+- Compresses attention inputs into a smaller, low-dimensional vector (latent vector).
+- Stores only the latent vector, reducing memory usage significantly.
+
+
+🔹**How It Works**:
+1. **Down-projection**: Maps the original high-dimensional input into a compact latent vector.
+2. **Storage**: Keeps only this compressed latent vector instead of full attention keys & values.
+3. **Up-projection**: Expands the latent vector back when attention calculations are needed.
+
+🔹**Why It Matters**:
+  
+  ✅ Saves memory by storing smaller representations.
+
+  ✅ Speeds up attention computation without losing key information.
+
+  ✅ Efficient for long-context LLMs needing large attention windows.
+
+🚀 **TL;DR**: MLA shrinks attention inputs, stores a compressed version, and expands it only when needed—reducing memory and boosting efficiency!
 
 # Reference
 
