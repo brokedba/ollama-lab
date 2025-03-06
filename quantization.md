@@ -212,6 +212,8 @@ The following table summarizes the performance results (perplexity, model size, 
 
 **Quality**: Achieves a quality close to multi-head attention (MHA) by balancing between multi-query attention (MQA) and MHA.
 **Speed**: Maintains a speed comparable to MQA, faster than MHA, by using an intermediate number of key-value heads.
+# MOE VS MLA
+![image](https://github.com/user-attachments/assets/5734164f-f9a3-4d0f-a7bc-93bb173ac5ac)
 
 # Reference
 
