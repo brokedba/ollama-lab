@@ -108,7 +108,7 @@ ingress:
 
 - *API is now reachable at `ollama.domain.lan`*
 
-# Downloa top watch tool
+# Download top watch tool
 ```
 git clone --depth 1 https://github.com/cjbassi/gotop /tmp/gotop
 /tmp/gotop/scripts/download.sh
