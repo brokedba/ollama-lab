@@ -18,6 +18,7 @@ helm repo add ollama-helm https://otwld.github.io/ollama-helm/
 helm repo update
 helm install ollama ollama-helm/ollama --namespace ollama --create-namespace --values ollama_values.yml
 ```
+- Use [ollama_base_values.yml](./helm/ollama_base_values.yml) which are enough for a basic deploynment in OCI. 
 - See [values.yaml](https://github.com/otwld/ollama-helm/blob/main/values.yaml) to see the Chart's default values.
 ## Upgrading Ollama chart
 
